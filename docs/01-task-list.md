@@ -29,6 +29,7 @@
 | 11 | Garmin sync (Phase 1.5) | Connect Garmin and import history | 0 / 9 |
 | 12 | Hardening | Safe retries, account deletion, CI guards | 0 / 7 |
 | 13 | Audio guide (Phase 2) | The app tells you when to change speed or incline | 0 / 3 |
+| 14 | Tech Task | For better dev exp | 0 / 3 |
 
 Milestones 1–8 are the usable MVP without an LLM. 9–11 complete Phase 1 and 1.5.
 
@@ -197,6 +198,11 @@ Replace the mock in `GET /home` one field at a time.
 - [ ] **13.1 [server]** Planner fills `plan_steps.cue` for every step
 - [ ] **13.2 [client]** Run mode speaks the cue at each change (`speechSynthesis`), with a short warning before it
 - [ ] **13.3 [client]** Audio on/off toggle in run mode and in preferences
+
+## 14. Tech task
+- [ ] Migration script running in ci pipeline
+- [ ] Terraform script running in ci pipeline
+- [ ] Separate prod env from dev dev env
 
 ---
 
