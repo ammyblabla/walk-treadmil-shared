@@ -15,7 +15,7 @@
 
 | # | Milestone | What you can do when it's finished | Done |
 |---|---|---|---|
-| 0 | Foundation | Backend deploys to Cloud Run with DB, auth and profile API | 8 / 8 |
+| 0 | Foundation | Backend deploys to Cloud Run with DB, auth and profile API | 9 / 9 |
 | 1 | Walking skeleton | Open the app on the phone, sign in, see the (mock) home screen | 0 / 9 |
 | 2 | Profile and preferences | Edit profile, treadmill limits and defaults in the app | 0 / 5 |
 | 3 | First real plan | Pick a time, get a real steady plan, see it as a chart and step list | 0 / 7 |
@@ -26,10 +26,10 @@
 | 8 | History | Browse, add, fix and delete workouts | 0 / 7 |
 | 9 | Chat | Free-text plan changes in a bottom sheet | 0 / 6 |
 | 10 | Import and analysis | Screenshot or link becomes a workout with feedback | 0 / 7 |
-| 11 | Garmin sync (Phase 1.5) | Connect Garmin and import history | 0 / 9 |
+| 11 | Garmin sync (Phase 1.5) | Connect Garmin and import history | 0 / 10 |
 | 12 | Hardening | Safe retries, account deletion, CI guards | 0 / 7 |
 | 13 | Audio guide (Phase 2) | The app tells you when to change speed or incline | 0 / 3 |
-| 14 | Tech Task | For better dev exp | 0 / 3 |
+| 14 | Tech tasks | Safer, more automated delivery | 1 / 3 |
 
 Milestones 1–8 are the usable MVP without an LLM. 9–11 complete Phase 1 and 1.5.
 
@@ -45,6 +45,7 @@ Milestones 1–8 are the usable MVP without an LLM. 9–11 complete Phase 1 and 
 - [x] **0.6 [server]** ORM models for all 13 tables and the initial migration
 - [x] **0.7 [server]** `GET/PUT /me/profile` with computed HR zones (`planner/hr_zones.py`)
 - [x] **0.8 [server]** Firebase ID token check, just-in-time user creation, `AUTH_MODE=dev` for local
+- [x] **0.9 [server]** Production database: Neon Postgres 18 (`aws-ap-southeast-1`), URLs in Secret Manager, wired into Cloud Run; smoke test checks `/me/profile` returns 401
 
 ## 1. Walking skeleton — client on the phone
 
@@ -55,7 +56,7 @@ Goal: the thinnest path from phone to deployed backend, before any real feature.
 - [ ] **1.3 [client]** Deploy to Cloudflare Pages on push to `main`
 - [ ] **1.4 [server]** CORS: allow the Pages origin and `http://localhost:5173` (from config)
 - [ ] **1.5 [client]** `npm run gen:api` (`openapi-typescript` + `openapi-fetch`) and an API client that reads the base URL from env
-- [ ] **1.6 [client]** Sign-in page with Firebase Google sign-in; route guard; send the ID token as `Bearer` on every call
+- [ ] **1.6 [client]** Sign-in page with Firebase Google sign-in; route guard; send the ID token as `Bearer` on every call. First, register a **Web app** in Firebase project `walk-treadmil` (none exists yet) for the client config, and add the Pages domain to Auth → **Authorized domains**
 - [ ] **1.7 [client]** App shell: React Router, bottom navigation (Home, History, Profile), theme ported from `mockup/index.html`
 - [ ] **1.8 [client]** Home page that renders `GET /home`: plan card with a small chart, Start button, quick chips (not wired yet), week summary
 - [ ] **1.9 [client]** PWA: manifest, icons, service worker (`vite-plugin-pwa`). Check "Install app" on the phone
@@ -182,6 +183,7 @@ Replace the mock in `GET /home` one field at a time.
 - [ ] **11.7 [client]** Garmin section on the profile page: connect, MFA step, status, disconnect
 - [ ] **11.8 [client]** "Sync now" on the history page
 - [ ] **11.9 [server]** `/home`: real `integrations` status
+- [ ] **11.10 [server]** Fill `is_period` from Garmin cycle data when available, and skip the question (decision D3). Depends on the 11.1 spike showing that the data is reachable
 
 ## 12. Hardening
 
@@ -199,10 +201,11 @@ Replace the mock in `GET /home` one field at a time.
 - [ ] **13.2 [client]** Run mode speaks the cue at each change (`speechSynthesis`), with a short warning before it
 - [ ] **13.3 [client]** Audio on/off toggle in run mode and in preferences
 
-## 14. Tech task
-- [ ] Migration script running in ci pipeline
-- [ ] Terraform script running in ci pipeline
-- [ ] Separate prod env from dev dev env
+## 14. Tech tasks
+
+- [x] **14.1 [server]** Migrations run in CI before each deploy (`alembic upgrade head` on the runner against Neon's direct endpoint; a failure keeps the old revision serving)
+- [ ] **14.2 [server]** Terraform in CI. Today CI runs `fmt -check` and `validate`, and `apply` is manual. Next: `plan` on push, and `apply` via a manual "Run workflow" button with a separate Terraform service account
+- [ ] **14.3 [server + client]** Separate dev and prod: a Neon `dev` branch, a second Cloud Run service or project, and a separate Firebase project or tenant
 
 ---
 
