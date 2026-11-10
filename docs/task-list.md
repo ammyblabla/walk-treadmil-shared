@@ -1,7 +1,7 @@
-# 01 — Task list
+# Task list
 
 **Last updated:** 2026-11-10
-**Sources:** `walk-treadmil-server/docs/requirement/01-introduction.md`, `walk-treadmil-server/docs/requirement/02-db-schema-and-api.md`, `walk-treadmil-client/docs/requirement/01-frontend-requirement.md`, ADR-0001.
+**Sources:** [01 introduction](requirement/01-introduction.md), [02 DB schema and API](requirement/02-db-schema-and-api.md), [03 frontend requirement](requirement/03-frontend-requirement.md), [ADR-0001](adr/0001-tech-stack.md).
 
 ## How to use this list
 
@@ -9,7 +9,7 @@
 - Each task is one commit on `main` (trunk-based) and leaves `main` deployable. Unfinished features stay unwired.
 - Tick a box only when the task is on `main`, tests and lint pass, and (for server tasks) it is deployed.
 - Tags: **[server]** = `walk-treadmil-server`, **[client]** = `walk-treadmil-client`.
-- "Spec" means `02-db-schema-and-api.md`.
+- "Spec" means [requirement/02-db-schema-and-api.md](requirement/02-db-schema-and-api.md).
 
 ## Progress
 
@@ -57,7 +57,7 @@ Goal: the thinnest path from phone to deployed backend, before any real feature.
 - [ ] **1.4 [server]** CORS: allow the Pages origin and `http://localhost:5173` (from config)
 - [ ] **1.5 [client]** `npm run gen:api` (`openapi-typescript` + `openapi-fetch`) and an API client that reads the base URL from env
 - [ ] **1.6 [client]** Sign-in page with Firebase Google sign-in; route guard; send the ID token as `Bearer` on every call. First, register a **Web app** in Firebase project `walk-treadmil` (none exists yet) for the client config, and add the Pages domain to Auth → **Authorized domains**
-- [ ] **1.7 [client]** App shell: React Router, bottom navigation (Home, History, Profile), theme ported from `mockup/index.html`
+- [ ] **1.7 [client]** App shell: React Router, bottom navigation (Home, History, Profile), theme ported from `walk-treadmil-client/mockup/index.html`
 - [ ] **1.8 [client]** Home page that renders `GET /home`: plan card with a small chart, Start button, quick chips (not wired yet), week summary
 - [ ] **1.9 [client]** PWA: manifest, icons, service worker (`vite-plugin-pwa`). Check "Install app" on the phone
 
