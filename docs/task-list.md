@@ -16,7 +16,7 @@
 | # | Milestone | What you can do when it's finished | Done |
 |---|---|---|---|
 | 0 | Foundation | Backend deploys to Cloud Run with DB, auth and profile API | 9 / 9 |
-| 1 | Walking skeleton | Open the app on the phone, sign in, see the (mock) home screen | 0 / 9 |
+| 1 | Walking skeleton | Open the app on the phone, sign in, see the (mock) home screen | 1 / 9 |
 | 2 | Profile and preferences | Edit profile, treadmill limits and defaults in the app | 0 / 5 |
 | 3 | First real plan | Pick a time, get a real steady plan, see it as a chart and step list | 0 / 7 |
 | 4 | All styles and conditions | All 7 styles; sleep, period and injury change the plan | 0 / 14 |
@@ -51,7 +51,7 @@ Milestones 1–8 are the usable MVP without an LLM. 9–11 complete Phase 1 and 
 
 Goal: the thinnest path from phone to deployed backend, before any real feature.
 
-- [ ] **1.1 [client]** Scaffold Vite + React 19 + TypeScript, Tailwind, shadcn/ui, Vitest, ESLint. One placeholder page
+- [x] **1.1 [client]** Scaffold Vite + React 19 + TypeScript, Tailwind, shadcn/ui, Vitest, oxlint (Vite's template default, chosen over ESLint). One placeholder page
 - [ ] **1.2 [client]** GitHub Actions: typecheck, lint, test, build
 - [ ] **1.3 [client]** Deploy to Cloudflare Pages on push to `main`
 - [ ] **1.4 [server]** CORS: allow the Pages origin and `http://localhost:5173` (from config)
